@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     required: true,
   },
   password: {
-    type: Number,
+    type: String,
     min: 0,
     max: 128,
     required: true,
@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
     default: 'https://www.sibberhuuske.nl/wp-content/uploads/2016/10/default-avatar.png'
   },
   role: {
-    type: String,
+    type: Number,
     enum: [1, 2],
     default: 1
   },

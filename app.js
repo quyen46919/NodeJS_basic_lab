@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
 const connectDB = require('./configs/database.config');
+const session = require('express-session');
 
-var indexRouter = require('./routes/index');
+var authRoute = require('./routes/auth.route');
+var newsRoute = require('./routes/news.route');
 
 var app = express();
 
@@ -19,10 +21,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: "NodeJS basic" }));
 
 connectDB();
 
-app.use('/', indexRouter);
+app.use('/', authRoute);
+
+app.use((req, res, next) => {
+  if (req.session.email) {
+    res.locals.email = req.session.email;
+    next();
+  } else {
+    res.render('./login', { errorMessage: null });
+  }
+});
+
+app.use('/news', newsRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

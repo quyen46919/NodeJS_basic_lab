@@ -1,0 +1,55 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="w-full h-full flex items-start justify-center">
+        <div class="flex justify-center self-center z-10 border-green-400 border-2 border-solid rounded-lg">
+            <div class="p-12 bg-white mx-auto rounded-2xl w-100 ">
+                <div class="mb-4">
+                    <h3 class="font-semibold text-2xl text-gray-800">Đăng nhập</h3>
+                    <p class="text-gray-500">Bạn chưa có tài khoản?
+                        <a href="/logup" class="text-green-400 hover:text-green-500">
+                            Đi đến đăng ký
+                        </a>
+                    </p>
+                </div>
+                <% if (errorMessage) {%>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-4 mb-3 rounded relative" role="alert">
+                        <span class="block sm:inline"><%= errorMessage %></span>
+                    </div>
+                <%}%>
+                <form class="space-y-5" action="/login" method="post">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-700 tracking-wide">Email</label>
+                        <input
+                            class=" w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
+                            type="email" name="email" placeholder="your-email@gmail.com">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="mb-5 text-sm font-medium text-gray-700 tracking-wide">
+                            Mật khẩu
+                        </label>
+                        <input
+                            class="w-full content-center text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
+                            type="password" name="password" placeholder="abc1234">
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="w-full flex justify-center bg-green-400  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500">
+                            Đăng nhập
+                        </button>
+                    </div>
+                </form>
+                <div class="pt-5 text-center text-gray-400 text-xs">
+                    <span>
+                        Copyright © 2021-2022
+                        <a href="https://codepen.io/uidesignhub" rel="" target="_blank" title="Ajimon"
+                            class="text-green hover:text-green-500 ">AJI</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
