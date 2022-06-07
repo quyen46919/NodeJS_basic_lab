@@ -1,16 +1,23 @@
 <div class="bg-white max-w-7xl mx-auto flex items-end justify-start gap-10 pb-4 pt-3 border-b-[1px] border-b-gray-100 border-solid">
-    <p class="text-blue-800 text-blue text-3xl font-bold">VietnamNews</p>
+    <p class="text-blue-800 text-3xl font-bold">VietnamNews</p>
     <div class="flex items-end justify-start gap-30 flex-grow gap-10">
         <a href="#">Tin mới</a>
         <a href="#">Trend</a>
         <a href="#">Video</a>
     </div>
-    <div class="w-[260px] flex items-center justify-end gap-6">
-        <button class="w-1/2 h-[40px] text-white bg-blue-700 rounded-sm px-3">
-            <a href="/sign-in">Đăng nhập</a>
+    <% if (email) {%>
+        <%= email %>
+        <button class="w-[100px] py-1 border-solid border-blue-700 border-[1px] text-blue-700 rounded-sm">
+            <a href="/logout">Đăng xuất</a>
         </button>
-        <button class="w-1/2 h-[40px] border-solid border-blue-700 border-[1px] text-blue-700 rounded-sm">
-            <a href="/sign-up">Đăng ký</a>
-        </button>
-    </div>
+    <%} else { %>
+        <div class="w-[260px] flex items-center justify-end gap-6">
+            <button class="w-1/2 h-[40px] text-white bg-blue-700 rounded-sm px-3">
+                <a href="/sign-in">Đăng nhập</a>
+            </button>
+            <button class="w-1/2 h-[40px] border-solid border-blue-700 border-[1px] text-blue-700 rounded-sm">
+                <a href="/sign-up">Đăng ký</a>
+            </button>
+        </div>
+    <% } %> 
 </div>

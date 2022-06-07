@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/styles.css" />
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  </head>
 
-  <body>
-    <% include components/header %>
+<head>
+  <title>
+    Tin tức hôm nay
+  </title>
+  <link rel="stylesheet" href="/styles/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <% include components/header %>
     <div class="w-7xl max-w-7xl h-auto flex item-center justify-start m-auto mt-8 mb-10 gap-10">
       <!-- left column -->
       <div class="w-full md:w-3/4 h-auto">
@@ -15,16 +18,12 @@
         <div class="w-full h-auto mb-4 border-b-[1px] border-gray-200 border-solid">
           <p class="text-blue-700 text-sm my-1">Thể thao</p>
           <p class="text-3xl mt-2 mb-6">
-            <a href="#"
-              >SEA Games 31 thi đấu sòng phẳng, gây ấn tượng mạnh từ những khán
-              đài đầy ắp khán giả</a
-            >
+            <a href="#">SEA Games 31 thi đấu sòng phẳng, gây ấn tượng mạnh từ những khán
+              đài đầy ắp khán giả</a>
           </p>
-          <img
-            class="w-full max-h-96 object-cover"
+          <img class="w-full max-h-96 object-cover"
             src="https://cdnmedia.baotintuc.vn/Upload/XjfgEPYM30O8z6jY3MHxSw/files/2022/05/2305/nu.jpg"
-            alt="seagame 31"
-          />
+            alt="seagame 31" />
           <p class="mt-4 mb-2 text-gray-500 text-sm">
             Nguyễn Châu Quyền - 7 phút trước
           </p>
@@ -60,5 +59,6 @@
       </div>
       <!-- end right column -->
     </div>
-  </body>
+</body>
+
 </html>

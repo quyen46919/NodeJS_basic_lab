@@ -1,14 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const authController = require('../controllers/auth.controller');
 
-/* LOGIN */
-router.post('/login', function(req, res, next) {
-  res.send('This is login route');
-});
-
-/* REGISTER */
-router.post('/register', function(req, res, next) {
-  res.send('This is register route');
-});
+router.get('/login', authController.getLoginPage);
+router.get('/logup', authController.getLogupPage);
+router.get('/logout', authController.logout);
+router.post('/login', authController.login);
+router.post('/logup', authController.logup);
 
 module.exports = router;
