@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Đăng tin mới</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body>
+    <% include components/header %>
+    <div
+      class="w-7xl max-w-7xl h-auto flex flex-col item-center justify-start m-auto mt-8 mb-10 gap-10 sm:mx-[100px]"
+    >
+      <h1 class="text-2xl">Tạo bài báo mới</h1>
+      <% if (errorMessage) {%>
+      <div
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-4 rounded relative"
+        role="alert"
+      >
+        <span class="block sm:inline"><%= errorMessage %></span>
+      </div>
+      <%}%>
+      <form
+        class="space-y-5"
+        action="/news"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-700 tracking-wide"
+            >Thể loại</label
+          >
+          <select
+            class="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
+            name="category"
+          >
+            <option value="Thể thao">Thể thao</option>
+            <option value="Điện ảnh">Điện ảnh</option>
+            <option value="Trò chơi">Trò chơi</option>
+            <option value="Xã hội">Xã hội</option>
+            <option value="Đời sống">Đời sống</option>
+            <option value="Sức khỏe">Sức khỏe</option>
+            <option value="Thể loại khác">Thể loại khác</option>
+          </select>
+        </div>
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-700 tracking-wide"
+            >Tiêu đề</label
+          >
+          <input
+            class="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
+            type="text"
+            name="title"
+            placeholder="Nhập tiêu đề ở đây"
+            required
+          />
+        </div>
+        <div class="space-y-2">
+          <label class="mb-5 text-sm font-medium text-gray-700 tracking-wide">
+            Nội dung
+          </label>
+          <textarea
+            class="w-full content-center text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
+            type="text"
+            name="content"
+            placeholder="Nhập nội dung bài báo"
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            for="small_size"
+            >Ảnh minh họa</label
+          >
+          <input
+            class="block mb-5 w-full text-xs text-gray-900 bg-gray-50 border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            type="file"
+            name="image"
+            required
+          />
+        </div>
+        <div>
+          <button
+            type="submit"
+            class="w-[300px] flex justify-center bg-green-400 hover:bg-green-500 text-gray-100 p-3 rounded-sm tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500"
+          >
+            Tạo bài báo
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

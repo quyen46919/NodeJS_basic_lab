@@ -24,12 +24,13 @@ const userSchema = mongoose.Schema({
     type: Number,
     min: 0,
     max: 100,
-    default: 'https://www.sibberhuuske.nl/wp-content/uploads/2016/10/default-avatar.png'
+    default:
+      'https://www.sibberhuuske.nl/wp-content/uploads/2016/10/default-avatar.png',
   },
   role: {
     type: Number,
     enum: [1, 2],
-    default: 1
+    default: 1,
   },
   createdAt: {
     type: String,
@@ -41,7 +42,6 @@ const userSchema = mongoose.Schema({
   },
 });
 
-const User = mongoose.model('User', userSchema);
+const Users = mongoose.model('User', userSchema);
 
-module.exports = User;
-
+module.exports = Users;
