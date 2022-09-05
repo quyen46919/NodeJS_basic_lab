@@ -1,8 +1,20 @@
 const News = require('../models/news.model');
 const Users = require('../models/user.model');
+const timeSince = require('../utils/timeSince');
 
-const getHomePage = (req, res) => {
-  res.render('index');
+const getHomePage = async (req, res) => {
+  const news = await News.aggregate([
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'userId',
+        foreignField: '_id',
+        as: 'author',
+      },
+    },
+  ]);
+  news.map((news) => (news.createdAt = timeSince(news.createdAt) + ' trước'));
+  res.render('index', { news });
 };
 
 const getPostPage = (req, res) => {
@@ -25,13 +37,24 @@ const createNews = async (req, res) => {
     if (err) {
       res.render('post', { errorMessage: 'Tạo mới thất bại' });
     } else {
-      res.render('index');
+      getHomePage(req, res);
     }
   });
+};
+
+const getEditPage = async (req, res) => {
+  console.log(req.query.id);
+  if (!req.query.id) {
+    getHomePage(req, res);
+  } else {
+    const news = await News.findById(req.query.id);
+    res.render('edit', { errorMessage: null, news });
+  }
 };
 
 module.exports = {
   getHomePage,
   getPostPage,
   createNews,
+  getEditPage,
 };
