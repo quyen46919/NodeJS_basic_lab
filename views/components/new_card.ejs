@@ -1,10 +1,12 @@
 <div class="w-full h-auto overflow-hidden border-b-[1px] border-gray-200 border-solid">
-  <% if(news){ %>
-    <% if(news.author[0].email === email) { %>
-      <button class="justify-center bg-green-400 hover:bg-green-500 text-gray-100 px-2 py-1 rounded-sm tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
-        <a href=<%= `/news/edit?id=${news._id}`%>>Chỉnh sửa bài báo</a>
-      </button>
-    <% } %> 
+  <% if(news.author[0].email === email) { %>
+    <button class="justify-center bg-green-400 hover:bg-green-500 text-gray-100 px-2 py-1 rounded-sm tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
+      <a href=<%= `/news/edit?id=${news._id}`%>>Chỉnh sửa bài báo</a>
+    </button>
+    <button class="justify-center bg-red-400 hover:bg-red-500 text-gray-100 px-2 py-1 rounded-sm tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
+      <a href=<%= `/news/delete?id=${news._id}`%>>Xoá</a>
+    </button>
+  <% } %> 
     <div class="w-full flex items-center justify-between">
       <p class="text-blue-700 text-sm my-1"><%= news.category %> </p>
       <p class="mt-4 mb-2 text-gray-400 text-sm"><%= news.author[0].fullName%> - <%= news.createdAt%></p>
@@ -22,5 +24,4 @@
     <p class="text-sm mt-1 mb-4 line-clamp-5 text-gray-500">
       <%= news.content %>
     </p>
-  <% } %>
 </div>

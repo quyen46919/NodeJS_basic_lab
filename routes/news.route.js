@@ -5,6 +5,8 @@ const newsController = require('../controllers/news.controller');
 
 router.get('/', newsController.getHomePage);
 router.get('/post', newsController.getPostPage);
+router.get('/edit', newsController.getEditPage);
+router.get('/delete', newsController.getDeletePage);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -20,4 +22,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post('/', upload.single('image'), newsController.createNews);
+router.post('/edit', upload.single('image'), newsController.updateNews);
+router.post('/delete', newsController.deleteNews);
 module.exports = router;

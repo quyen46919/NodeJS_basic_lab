@@ -2,7 +2,7 @@ const News = require('../models/news.model');
 const Users = require('../models/user.model');
 const timeSince = require('../utils/timeSince');
 
-const getHomePage = async (req, res) => {
+const getHomePage = async (req, res ) => {
   const news = await News.aggregate([
     {
       $lookup: {
@@ -16,6 +16,10 @@ const getHomePage = async (req, res) => {
   news.map((news) => (news.createdAt = timeSince(news.createdAt) + ' trước'));
   res.render('index', { news });
 };
+
+const redirectHomePage = (req, res) => {
+  res.redirect('/news')
+}
 
 const getPostPage = (req, res) => {
   res.render('./post', { errorMessage: null });
@@ -37,24 +41,59 @@ const createNews = async (req, res) => {
     if (err) {
       res.render('post', { errorMessage: 'Tạo mới thất bại' });
     } else {
-      getHomePage(req, res);
+      redirectHomePage(req, res);
     }
   });
 };
 
 const getEditPage = async (req, res) => {
-  console.log(req.query.id);
   if (!req.query.id) {
-    getHomePage(req, res);
+    redirectHomePage(req, res);
   } else {
     const news = await News.findById(req.query.id);
     res.render('edit', { errorMessage: null, news });
   }
 };
 
+const updateNews = async (req, res) => {
+  const updateValues = {
+    ...(req?.file?.filename && { image: req.file.filename }),
+    category: req.body.category,
+    title: req.body.title,
+    content: req.body.content,
+    updatedAt: Date.now(),
+  };
+  const updatedNews = await News.findByIdAndUpdate(req.query.id, updateValues);
+  const news = await News.findById(req.query.id);
+  if (updatedNews) {
+    res.render('edit', { errorMessage: null, news });
+  } else {
+    const news = await News.findById(req.query.id);
+    res.render('edit', { errorMessage: 'Cập nhật thất bại', news });
+  }
+};
+
+const getDeletePage = async (req, res) => {
+  const news = await News.findById(req.query.id);
+  res.render('delete', { errorMessage: null, news });
+}
+
+const deleteNews = async (req, res) => {
+  const result = await News.findByIdAndDelete(req.query.id);
+  if (result) {
+    redirectHomePage(req, res);
+  } else {
+    const news = await News.findById(req.query.id);
+    res.render('delete', { errorMessage: "Có lỗi xảy ra, vui lòng thử lại!", news });
+  }
+}
+
 module.exports = {
   getHomePage,
   getPostPage,
   createNews,
   getEditPage,
+  updateNews,
+  getDeletePage,
+  deleteNews,
 };
